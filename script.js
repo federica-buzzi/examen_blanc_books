@@ -383,10 +383,14 @@ var bds = [
 // }
 
 function render() {
-  let containerLivre = '';
+  let containerLivre = `<div id="intro">
+  <div><h1>BD</h1></div>
+  <div id="interiorPanier">Panier</div>
+  </div>
+  <div class= "containerCartes">`;
 
   for (var livre of bds) {
-    containerLivre += `Id: ${livre.id}<br>
+    containerLivre += `<div class= "carte">Id: ${livre.id}<br>
     Titre: ${livre.titre}<br>
     Editeur: ${livre.editeur}<br>
     Collection: ${livre.collection}<br>
@@ -401,27 +405,29 @@ function render() {
     Like: ${livre.like}<br>
     Themes: ${livre.themes}<br>
     Auteurs: ${livre.auteurs}<br>
-    Image: <img src="static/${livre.image}"><br>`;
+    <img src="${livre.image}" style="width:150px"><br>`;
 
     // slice resume
-    containerLivre += `<span class="apercues">Resume: ${livre.resume.slice(0, 29)}</span><span class="expandes" style="display:none">${
+    containerLivre += `<p>Resume: ${livre.resume.slice(0, 29)}<span class="expandes" style="display:none">${
       livre.resume.slice(29)
-    }</span><br>
-    <button class= "btn" >lire la suite</button><br>`;
+    }</span></p>
+    <button class= "buttonLire" >lire la suite</button><br>`;
 
-    containerLivre += '<button>emprunter</button>';
+    containerLivre += '<button class="buttonEmprunt">emprunter</button>';
     containerLivre
-    += '<br>------------------------------------------------------------<br>';
+    += '</div>';
   }
 
-  var app = document.getElementById('app');
+  containerLivre += '</div>';
+  const app = document.getElementById('app');
   app.innerHTML += containerLivre;
 
-  var boutonsAfficher = document.querySelectorAll('.btn');
-  var expandes = document.querySelectorAll('.expandes');
+  const boutonsAfficher = document.querySelectorAll('.buttonLire');
+  const expandes = document.querySelectorAll('.expandes');
 
   // // afficher et cacher le resumé extend
-  for (var i = 0; i < boutonsAfficher.length; i++) {
+
+  for (let i = 0; i < boutonsAfficher.length; i++) {
     boutonsAfficher[i].addEventListener('click', () => {
       if (expandes[i].style.display === 'none') {
         expandes[i].style.display = 'block';
@@ -431,15 +437,13 @@ function render() {
     });
   }
 
-  // code seulement pour l'élément
+  const buttonsEmprunt = document.querySelectorAll('.buttonEmprunt');
 
-  // boutonsAfficher[2].addEventListener('click', () => {
-  //   if (expandes[2].style.display === 'none') {
-  //     expandes[2].style.display = 'block';
-  //   } else {
-  //     expandes[2].style.display = 'none';
-  //   }
-  // });
+  for (let i = 0; i < buttonsEmprunt.length; i++) {
+    buttonsEmprunt[i].addEventListener('click', () => {
+      const interiorPanierDiv = document.getElementById('interiorPanier');
+      interiorPanierDiv.innerHTML += `<p>${bds[i].titre}</p>`;
+    });
+  }
 }
-
 render();

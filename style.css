@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  background-color: pink;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.containerCartes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.carte {
+  background-color: plum;
+  border: dotted purple 2px;
+  font-family: sans-serif;
+  text-align: center;
+  width: 340px;
+}
+
+li {
+  list-style-type: none;
+}
+
+#interiorPanier {
+  border: dotted purple 1px;
+  width: 50%;
+  margin: auto;
+}
+
+#intro {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+}
